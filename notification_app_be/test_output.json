@@ -1,0 +1,65 @@
+{
+  "status": "success",
+  "topNotifications": [
+    {
+      "id": "9190b7a0-6a40-4cf2-94dd-8dc7286fd2c5",
+      "type": "Placement",
+      "message": "Alphabet Inc. Class A hiring",
+      "timestamp": "2026-05-06 07:40:13"
+    },
+    {
+      "id": "86d5edaf-d1b4-49f7-81d7-aeef6bac69ea",
+      "type": "Placement",
+      "message": "Marriott International Inc. hiring",
+      "timestamp": "2026-05-06 06:39:25"
+    },
+    {
+      "id": "2cd9451a-655b-4c3d-a1c4-599881602954",
+      "type": "Placement",
+      "message": "TSMC hiring",
+      "timestamp": "2026-05-05 18:40:25"
+    },
+    {
+      "id": "c9bbc736-7169-4f59-8d8d-45172ee22ebb",
+      "type": "Placement",
+      "message": "Amgen Inc. hiring",
+      "timestamp": "2026-05-05 17:39:33"
+    },
+    {
+      "id": "33ffd01e-d128-42e2-9bf8-a69d909e54d6",
+      "type": "Placement",
+      "message": "Booking Holdings Inc. hiring",
+      "timestamp": "2026-05-05 14:39:13"
+    },
+    {
+      "id": "d4614b2b-4d5e-4158-aab8-e01db4d5f751",
+      "type": "Placement",
+      "message": "TSMC hiring",
+      "timestamp": "2026-05-05 13:39:21"
+    },
+    {
+      "id": "e6268cbf-8b5a-4f4e-9866-f8273560c346",
+      "type": "Result",
+      "message": "mid-sem",
+      "timestamp": "2026-05-06 09:09:41"
+    },
+    {
+      "id": "a78c6b8d-acd4-4116-ab9a-dea5e7441505",
+      "type": "Result",
+      "message": "end-sem",
+      "timestamp": "2026-05-06 06:40:09"
+    },
+    {
+      "id": "8d2d8562-0575-4f27-a63e-4592e0694816",
+      "type": "Result",
+      "message": "end-sem",
+      "timestamp": "2026-05-06 03:40:01"
+    },
+    {
+      "id": "1f3f2306-63d3-4c2a-bfd8-d775e0c52c2f",
+      "type": "Result",
+      "message": "project-review",
+      "timestamp": "2026-05-05 19:39:17"
+    }
+  ]
+}
