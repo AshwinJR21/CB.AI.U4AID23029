@@ -1,10 +1,10 @@
-import Log from '../logging_middleware/index.mjs';
+import Log from 'logging_middleware';
 
 class PriorityInbox {
     constructor(maxSize = 10) {
         this.heap = [];
         this.maxSize = maxSize;
-        Log("backend", "info", "component", "Initialized priority box min heap with max size " + maxSize);
+        Log("frontend", "info", "state", "Initialized priority box min heap with max size " + maxSize);
     }
 
     getWeight(notification_type) {
@@ -29,20 +29,20 @@ class PriorityInbox {
     }                                                 //This function compares priority of two notifs. 
 
     push(notification) {
-        Log("backend", "debug", "component", "Evaluating new notification for priority inbox");
+        Log("frontend", "debug", "component", "Evaluating new notification for priority inbox");
         
         if (this.heap.length < this.maxSize) {
             this.heap.push(notification);
             this.bubbleUp(this.heap.length - 1);
-            Log("backend", "debug", "component", "Added notification to priority inbox (heap not full)");
+            Log("frontend", "debug", "component", "Added notification to priority inbox (heap not full)");
         } else {
 
             if (this.compare(notification, this.heap[0]) > 0) {
-                Log("backend", "info", "component", "Replacing lowest priority notification in the inbox");
+                Log("frontend", "info", "component", "Replacing lowest priority notification in the inbox");
                 this.heap[0] = notification;
                 this.bubbleDown(0);
             } else {
-                Log("backend", "debug", "component", "Notification priority too low for inbox, ignoring");
+                Log("frontend", "debug", "component", "Notification priority too low for inbox, ignoring");
             }
         }
     }                                               //This function inserts a new notification into the heap and does bubble up or down operations.
@@ -92,39 +92,8 @@ class PriorityInbox {
     }
 
     getTopNotifications() {
-        Log("backend", "info", "component", "Retrieving top notifications for display");
+        Log("frontend", "info", "component", "Retrieving top notifications for display");
         return [...this.heap].sort((a, b) => this.compare(b, a));
-    }
-
-    async fetchAndProcessNotifications() {
-        Log("backend", "info", "api", "Fetching notifications from evaluation service API");
-        try {
-            const response = await fetch("http://20.207.122.201/evaluation-service/notifications", {
-                headers: {
-                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJNYXBDbGFpbXMiOnsiYXVkIjoiaHR0cDovLzIwLjI0NC41Ni4xNDQvZXZhbHVhdGlvbi1zZXJ2aWNlIiwiZW1haWwiOiJoZWxsbG9hanJAZ21haWwuY29tIiwiZXhwIjoxNzc4MDY1Nzg5LCJpYXQiOjE3NzgwNjQ4ODksImlzcyI6IkFmZm9yZCBNZWRpY2FsIFRlY2hub2xvZ2llcyBQcml2YXRlIExpbWl0ZWQiLCJqdGkiOiI4N2E4N2I0NC0zMjcwLTQ4Y2MtYTlkMS1lN2Q3NGU2MDE3OGUiLCJsb2NhbGUiOiJlbi1JTiIsIm5hbWUiOiJyIGFzaHdpbiBqYXlhY2hhbmRyYW4iLCJzdWIiOiI0Yzg3OGMwNS04YzRiLTQyZjYtYTk2Mi03YWJlYzI5YzQ0MzMifSwiZW1haWwiOiJoZWxsbG9hanJAZ21haWwuY29tIiwibmFtZSI6InIgYXNod2luIGpheWFjaGFuZHJhbiIsInJvbGxObyI6ImNiLmFpLnU0YWlkMjMwMjkiLCJhY2Nlc3NDb2RlIjoiUFRCTW1RIiwiY2xpZW50SUQiOiI0Yzg3OGMwNS04YzRiLTQyZjYtYTk2Mi03YWJlYzI5YzQ0MzMiLCJjbGllbnRTZWNyZXQiOiJlZ1VLTmZVUGhOdXRVWmJSIn0.UId74uf9AeBgw6SyWE4iSY_4d6xHBEaiY9A8ywdzbZc"
-                }
-            });
-            if (!response.ok) {
-                Log("backend", "error", "api", "API fetch failed with unsuccessful status");
-                return;
-            }
-            const data = await response.json();
-            
-            const rawNotifications = Array.isArray(data) ? data : (data.notifications || []);
-            const notifications = rawNotifications.map(n => ({
-                id: n.id || n.ID,
-                type: n.type || n.Type,
-                message: n.message || n.Message,
-                timestamp: n.timestamp || n.Timestamp
-            }));
-            
-            Log("backend", "info", "api", "Successfully parsed notification payload");
-            for (const notif of notifications) {
-                this.push(notif);
-            }
-        } catch (error) {
-            Log("backend", "error", "api", "Exception occurred while fetching notifications");
-        }
     }
 }
 
